@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
   FETCH_POSTS,
   FETCH_POSTS_FULFILLED,
@@ -9,7 +11,7 @@ import {
 const initialState = {
   fetching: false,
   fetched: false,
-  posts: [],
+  posts: {},
   error: null,
 };
 
@@ -21,7 +23,7 @@ export default function postsReducer(state=initialState, action) {
       break;
     }
     case FETCH_POSTS_FULFILLED: {
-      state = { ...state, fetching: false, fetched: true, posts: action.payload }
+      state = { ...state, fetching: false, fetched: true, posts: _.mapKeys(action.payload, 'id') }
       break;
     }
     case FETCH_POSTS_REJECTED: {
