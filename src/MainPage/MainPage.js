@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import './MainPage.css';
 
+import './MainPage.css';
 import CategoryMenu from './CategoryMenu/CategoryMenu';
 import Posts from './Posts/Posts';
 

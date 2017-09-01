@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import '../MainPage.css';
-import { timeConverter } from '../../utils/helpers';
 import { fetchPosts } from './postsActions';
 import PostDetail from './Route-PostDetail/PostDetail';
 
@@ -26,11 +25,13 @@ class Posts extends Component {
           {this.props.posts && _.map(this.props.posts, (post) => {
              return (
                <div key={post.id} className="post">
-                <Link to={`/post/${post.id}`} className="post-title" component={PostDetail}>{post.title}</Link>
+                <Link to={`/post/${post.id}`} className="post-title">{post.title}</Link>
               </div>
              )
           })}
-          <button>add post</button>
+          <Link to="/posts/new">
+            <button>add post</button>
+          </Link>
         </div>
       </div>
     )
@@ -43,4 +44,4 @@ function mapStateToProps({ posts }) {
 
 
 
-export default connect(mapStateToProps)(Posts);
+export default withRouter(connect(mapStateToProps)(Posts));

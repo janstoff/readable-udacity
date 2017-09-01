@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import './PostNew.css';
 
@@ -17,16 +17,17 @@ class PostNew extends Component {
     console.log(this.props)
 
     return (
-            <div>
-              <Link to='/'>back</Link>
-              <form className="create-post-form"></form>
+            <div className="form-wrapper">
+              <form className="create-post-form">
                 <div className="create-post-details">
-                  <input type="text" name="title" placeholder="Title"/>
-                  <input type="text" name="author" placeholder="Author"/>
-                  <input type="text" name="category" placeholder="Category"/>
-                  <input type="textarea" name="body" placeholder="What is on your mind..."/>
+                  <input className="post-input" type="text" name="title" placeholder="Title"/>
+                  <input className="post-input" type="text" name="author" placeholder="Author"/>
+                  <input className="post-input" type="text" name="category" placeholder="Category"/>
+                  <input className="post-body" type="textarea" name="body" placeholder="What is on your mind..."/>
                   <button>Submit</button>
                 </div>
+              </form>
+              <Link to='/'>back</Link>
             </div>
     )
   }
@@ -35,4 +36,4 @@ class PostNew extends Component {
 
 
 
-export default connect()(PostNew);
+export default withRouter(connect()(PostNew));

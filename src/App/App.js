@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Route } from 'react-router-dom';
+import { withRouter,Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import './App.css';
@@ -17,13 +17,15 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Route exact path="/" render={() => (<MainPage />)} />
-        <Route path="/posts/:id" component={PostDetail} />
-        <Route path="/posts/new" component={PostNew} />
+        <Switch>
+          <Route path="/posts/new" component={PostNew} />
+          <Route exact path="/" component={MainPage} />
+          <Route path="/posts/:id" component={PostDetail} />
+        </Switch>
         <Footer />
       </div>
     );
   }
 }
 
-export default connect()(App);
+export default withRouter(connect()(App));
