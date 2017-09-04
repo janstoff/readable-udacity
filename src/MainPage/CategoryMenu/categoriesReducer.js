@@ -1,7 +1,8 @@
 import {
   FETCH_CATEGORIES,
   FETCH_CATEGORIES_FULFILLED,
-  FETCH_CATEGORIES_REJECTED
+  FETCH_CATEGORIES_REJECTED,
+  SELECT_CATEGORY,
 } from './categoriesActions';
 
 
@@ -10,6 +11,7 @@ const initialState = {
   fetching: false,
   fetched: false,
   categories: [],
+  selectedCategory: [ "all" ],
   error: null,
 };
 
@@ -26,6 +28,10 @@ export default function categoriesReducer(state=initialState, action) {
     }
     case FETCH_CATEGORIES_REJECTED: {
       state = { ...state, fetching: false, error: action.payload }
+      break;
+    }
+    case SELECT_CATEGORY: {
+      state = { ...state, selectedCategory: action.payload }
       break;
     }
   }

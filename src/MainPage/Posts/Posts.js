@@ -17,7 +17,9 @@ class Posts extends Component {
 
   render() {
 
-    console.log(this.props)
+    console.log(Object.keys(this.props.posts))
+
+    //let visiblePosts = Object.keys(this.props.posts).filter(post => post.category == this.props.selectedCategory);
 
     return (
       <div className="posts-wrapper">
@@ -38,8 +40,13 @@ class Posts extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
-  return {posts: posts.posts}
+
+
+function mapStateToProps({ posts, selectedCategory }) {
+  return {
+    posts: posts.posts,
+    selectedCategory: selectedCategory,
+  }
 }
 
 
