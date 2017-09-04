@@ -12,19 +12,42 @@ import { addPost } from '../postsActions';
 
 class PostNew extends Component {
 
+  renderField(field) {
+    <div>
+      <input
+        { ...field.input }
+        type="text"
+        className="post-input"
+      />
+    </div>
+  }
 
   render() {
-
-    console.log(this.props)
 
     return (
             <div className="form-wrapper">
               <form className="create-post-form">
-                  <input className="post-input" type="text" name="title" placeholder="Title"/>
-                  <input className="post-input" type="text" name="author" placeholder="Author"/>
-                  <input className="post-input" type="text" name="category" placeholder="Category"/>
-                  <input className="post-input" type="text" name="body" placeholder="What is on your mind..."/>
-                  <button type='submit'>Submit</button>
+                <Field
+                  name="title"
+                  placeholder="Title"
+                  component={this.renderField}
+                />
+                <Field
+                  name="author"
+                  placeholder="Author"
+                  component={this.renderField}
+                />
+                <Field
+                  name="category"
+                  placeholder="Category"
+                  component={this.renderField}
+                />
+                <Field
+                  name="body"
+                  placeholder="What is on your mind..."
+                  component={this.renderField}
+                />
+                <button type='submit'>Submit</button>
               </form>
               <Link to='/'>back</Link>
             </div>
@@ -35,4 +58,7 @@ class PostNew extends Component {
 
 
 
-export default withRouter(connect()(PostNew));
+export default reduxForm({
+  form: 'NewPostForm'
+})
+(connect()(withRouter(PostNew)));
