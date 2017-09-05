@@ -10,31 +10,23 @@ import { fetchSinglePost } from '../postsActions';
 
 class PostDetail extends Component {
 
-
-  state = {
-    post: {
-    "id": "8xf0y6ziyjabvozdd253nd",
-    "timestamp": 1467166872634,
-    "title": "Udacity is the best place to learn React",
-    "body": "Everyone says so after all.",
-    "author": "thingtwo",
-    "category": "react",
-    "voteScore": 6,
-    "deleted": false
-    }
+  componentDidMount() {
+    const { id } = this.props.match.params; //picking up the posts id from the URL with the help of react router
+    this.props.dispatch(fetchSinglePost(id))
   }
-
 
   render() {
 
-    console.log(this.props)
+    if (!this.props.post) {
+      return <div>Loading...</div>
+    }
 
     return (
             <div className="post">
-              <div className="post-title">{this.state.post.title}</div>
-              <div className="post-author">{this.state.post.author}</div>
-              <div className="post-date-time"> posted: {timeConverter(this.state.post.timestamp)}</div>
-              <div className="post-content">{this.state.post.body}</div>
+              <div className="post-title">{this.props.post.title}</div>
+              <div className="post-author">{this.props.post.author}</div>
+              <div className="post-date-time"> posted: {timeConverter(this.props.post.timestamp)}</div>
+              <div className="post-content">{this.props.post.body}</div>
               <div className="post-interaction">
                 <button>upvote</button>
                 <button>downvote</button>
@@ -45,8 +37,8 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
-  return {posts: posts.posts}
+function mapStateToProps({ posts }, ownProps) {
+  return { post: posts.posts[ownProps.match.params.id] };
 }
 
 

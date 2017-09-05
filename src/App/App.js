@@ -19,8 +19,8 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/posts/new" component={PostNew} />
-          <Route exact path="/" component={MainPage} />
           <Route path="/posts/:id" component={PostDetail} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
         <Footer />
       </div>
