@@ -55,10 +55,8 @@ class PostNew extends Component {
   }
 }
 
-
-PostNew = reduxForm({
+export default reduxForm({
   form: 'NewPostForm'
-})(PostNew)
-
-
-export default connect()(withRouter(PostNew));
+})(
+  connect()(PostNew)
+);
