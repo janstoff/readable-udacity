@@ -1,6 +1,6 @@
-#App
+# App
 
-##Installation
+## Installation
 
 This project requires Node and NPM. If you do not have it, please download it (https://nodejs.org/en/download/). To install My Reads clone the repository:
 
@@ -11,7 +11,7 @@ This project requires Node and NPM. If you do not have it, please download it (h
 `$ npm install`
 
 
-##View
+## View
 
 Launch App locally:
 
