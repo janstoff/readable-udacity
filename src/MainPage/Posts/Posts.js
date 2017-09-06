@@ -26,9 +26,9 @@ class Posts extends Component {
         <div className="posts-grid">
           {this.props.posts && _.map(this.props.posts, (post) => {
              return (
-               <div key={post.id} className="post">
+               <li key={post.id} className="post">
                 <Link to={`/posts/${post.id}`} className="post-title">{post.title}</Link>
-              </div>
+              </li>
              )
           })}
           <Link to="/posts/new">

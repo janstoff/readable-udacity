@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../../MainPage.css';
 
 import { timeConverter } from '../../../utils/helpers';
-import { fetchSinglePost } from '../postsActions';
+import { fetchSinglePost, deletePost } from '../postsActions';
 //const uuid = require('uuid/v1')
 
 
 
 class PostDetail extends Component {
 
+  state = {
+    editView: false
+  }
+
   componentDidMount() {
-    const { id } = this.props.match.params; //picking up the posts id from the URL with the help of react router
-    this.props.dispatch(fetchSinglePost(id))
+    const { id } = this.props.match.params;
+    //picking up the posts id from the URL with the help of react router
+    this.props.dispatch(fetchSinglePost(id));
+  }
+
+  onClickDelete() {
+    const { id } = this.props.match.params;
+    this.props.dispatch(deletePost(id, () => {
+      this.props.history.push('/');
+      //callback for navigation back to MainPage - called by .then(() => callback()) in postsActions
+    }));
   }
 
   render() {
@@ -22,6 +36,12 @@ class PostDetail extends Component {
     }
 
     return (
+          <div>
+            <button
+              className="btn btn-danger pull-right"
+              onClick={this.onClickDelete.bind(this)}
+              >Delete Post
+            </button>
             <div className="post">
               <div className="post-title">{this.props.post.title}</div>
               <div className="post-author">{this.props.post.author}</div>
@@ -33,6 +53,8 @@ class PostDetail extends Component {
                 <button>add comment</button>
               </div>
             </div>
+            <Link to='/'>back</Link>
+          </div>
     )
   }
 }

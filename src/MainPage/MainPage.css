@@ -32,6 +32,7 @@
   grid-column: 1/4;
   display: grid;
   background: #ede4e4;
+  margin-top: 2px;
   padding-top: 5px;
   justify-self: auto;
 }
