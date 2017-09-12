@@ -14,10 +14,6 @@ const uuid = require('uuid/v4')
 
 class PostNew extends Component {
 
-  componentWillMount() {
-    this.props.dispatch(fetchCategories())
-  }
-
 
   renderField(field) {
     // field argument contains eventhandlers which make sure the <Field/> element knows
@@ -142,16 +138,10 @@ function validate(values) {
 }
 
 
-function mapStateToProps({ categories }) {
-  return {
-    categories: categories.categories.categories
-  }
-}
-
 
 export default reduxForm({
   validate: validate,
   form: 'NewPostForm'
 })(
-  withRouter(connect(mapStateToProps)(PostNew)
+  withRouter(connect()(PostNew)
 ));
