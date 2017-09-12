@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import '../MainPage.css';
-import { fetchPosts } from './postsActions';
+import { fetchPosts, fetchPostsByCategory } from './postsActions';
 import PostDetail from './Route-PostDetail/PostDetail';
 
 
@@ -12,22 +12,33 @@ import PostDetail from './Route-PostDetail/PostDetail';
 class Posts extends Component {
 
   componentWillMount() {
-    this.props.dispatch(fetchPosts())
+    const { category } = this.props.match.params;
+
+    if(category) {
+      this.props.dispatch(fetchPostsByCategory(category))
+    } else {
+      this.props.dispatch(fetchPosts())
+    }
   }
 
   render() {
 
-    console.log(Object.keys(this.props.posts))
+    let visiblePosts
+      if (this.props.selectedCategory !== ' ') {
+        visiblePosts = _.filter(this.props.posts, { category:  this.props.selectedCategory });
+      } else {
+        visiblePosts = this.props.posts;
+      }
 
-    //let visiblePosts = Object.keys(this.props.posts).filter(post => post.category == this.props.selectedCategory);
+    console.log(this.props.selectedCategory);
 
     return (
       <div className="posts-wrapper">
         <div className="posts-grid">
-          {this.props.posts && _.map(this.props.posts, (post) => {
+          {visiblePosts && _.map(visiblePosts, (post) => {
              return (
                <li key={post.id} className="post">
-                <Link to={`/posts/${post.id}`} className="post-title">{post.title}</Link>
+                <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
               </li>
              )
           })}
@@ -42,10 +53,10 @@ class Posts extends Component {
 
 
 
-function mapStateToProps({ posts, selectedCategory }) {
+function mapStateToProps({ posts, categories }) {
   return {
     posts: posts.posts,
-    selectedCategory: selectedCategory,
+    selectedCategory: categories.selectedCategory,
   }
 }
 

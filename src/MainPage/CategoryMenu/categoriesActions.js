@@ -24,7 +24,8 @@ export function fetchCategories() {
 }
 
 export function selectCategory(category) {
-  return function(dispatch) {
-    dispatch({type:SELECT_CATEGORY, payload: category});
+  return {
+    type: SELECT_CATEGORY,
+    payload: category,
   }
 }

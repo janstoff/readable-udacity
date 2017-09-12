@@ -1,5 +1,7 @@
 .form-wrapper {
-  margin-top: 1%;
+  margin-top: 5%;
+  margin-left: 15%;
+  margin-right: 15%;
   margin-bottom: 1%;
   font-size: 14px;
 }
@@ -27,4 +29,8 @@
 .post-body {
   grid-column: 3/3;
   margin: 2px;
+}
+
+.has-danger {
+  color: #ac1b1b;
 }

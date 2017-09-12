@@ -5,15 +5,22 @@ import { API_URL, headers }from '../../utils/api';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POSTS_FULFILLED = 'FETCH_POSTS_FULFILLED';
 export const FETCH_POSTS_REJECTED = 'FETCH_POSTS_REJECTED';
+
+export const FETCH_POSTS_BY_CATEGORY = 'FETCH_POSTS_BY_CATEGORY';
+export const FETCH_POSTS_BY_CATEGORY_FULFILLED = 'FETCH_POSTS_BY_CATEGORY_FULFILLED';
+export const FETCH_POSTS_BY_CATEGORY_REJECTED = 'FETCH_POSTS_BY_CATEGORY_REJECTED';
+
 export const FETCH_POST = 'FETCH_POST';
 export const FETCH_POST_FULFILLED = 'FETCH_POST_FULFILLED';
 export const FETCH_POST_REJECTED = 'FETCH_POST_REJECTED';
+
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_POST_REJECTED = 'CREATE_POST_REJECTED';
+
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_POST_REJECTED = 'DELETE_POST_REJECTED';
 
-
+export const FILTER_POSTS_BY_CATEGORY = 'FILTER_POSTS_BY_CATEGORY';
 
 
 export function fetchPosts() {
@@ -26,6 +33,19 @@ export function fetchPosts() {
       .catch((error) => {
         dispatch({type: FETCH_POSTS_REJECTED, payload: error})
       })
+  }
+}
+
+export function fetchPostsByCategory(category) {
+  return function(dispatch) {
+    dispatch({type: FETCH_POSTS_BY_CATEGORY});
+    axios.get(`${API_URL}/${category}/posts`, { headers: headers })
+      .then((response) => {
+        dispatch({type: FETCH_POSTS_BY_CATEGORY_FULFILLED, payload: response.data})
+      })
+      .catch((error) => {
+        dispatch({type: FETCH_POSTS_BY_CATEGORY_REJECTED, payload: error})
+    })
   }
 }
 
@@ -43,16 +63,16 @@ export function fetchSinglePost(id) {
 }
 
 
-export function addPost(postToSubmit, callback) {
+export function createPost(postToSubmit) {
   return function(dispatch) {
-    axios.post(`${API_URL}/posts`, { headers: headers }, { postToSubmit })
+    axios.post(`${API_URL}/posts`, postToSubmit, { headers: headers })
       .then((response) => {
         dispatch({type: CREATE_POST, payload: response.data})
       })
       .catch((error) => {
         dispatch({type: CREATE_POST_REJECTED, payload: error})
       })
-      .then(() => callback());
+      //.then(() => callback());
   }
 }
 
@@ -66,5 +86,13 @@ export function deletePost(id, callback) {
         //simply return id as payload, because that is really all we need to update application state
       .then(() => callback());
       })
+  }
+}
+
+
+export function filterPostsByCategory(category) {
+  return {
+    type: FILTER_POSTS_BY_CATEGORY,
+    payload: category
   }
 }

@@ -11,9 +11,6 @@ import { fetchSinglePost, deletePost } from '../postsActions';
 
 class PostDetail extends Component {
 
-  state = {
-    editView: false
-  }
 
   componentDidMount() {
     const { id } = this.props.match.params;
