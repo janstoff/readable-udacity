@@ -60,7 +60,7 @@ export default function postsReducer(state=initialState, action) {
       return { ...state, posts: { ...state.posts, [action.payload.id]: action.payload } }
     }
     case DELETE_POST: {
-      return { ...state, posts: _.omit(state.posts, action.payload) }
+      return { ...state, posts: { ...state.posts, [action.payload.deleted]: true } }
     }
     case FILTER_POSTS_BY_CATEGORY: {
       return { ...state, /*posts: _.filter(state.posts, { [state.posts.category]: action.payload } )*/ }

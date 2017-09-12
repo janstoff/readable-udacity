@@ -63,7 +63,7 @@ export function fetchSinglePost(id) {
 }
 
 
-export function createPost(postToSubmit) {
+export function createPost(postToSubmit, callback) {
   return function(dispatch) {
     axios.post(`${API_URL}/posts`, postToSubmit, { headers: headers })
       .then((response) => {
@@ -72,7 +72,7 @@ export function createPost(postToSubmit) {
       .catch((error) => {
         dispatch({type: CREATE_POST_REJECTED, payload: error})
       })
-      //.then(() => callback());
+      .then(() => callback())
   }
 }
 
@@ -84,8 +84,8 @@ export function deletePost(id, callback) {
       .then((response) => {
         dispatch({type: DELETE_POST, payload: id})
         //simply return id as payload, because that is really all we need to update application state
-      .then(() => callback());
       })
+      .then(() => callback())
   }
 }
 

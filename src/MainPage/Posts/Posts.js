@@ -30,8 +30,6 @@ class Posts extends Component {
         visiblePosts = this.props.posts;
       }
 
-    console.log(this.props.selectedCategory);
-
     return (
       <div className="posts-wrapper">
         <div className="posts-grid">
@@ -55,7 +53,7 @@ class Posts extends Component {
 
 function mapStateToProps({ posts, categories }) {
   return {
-    posts: posts.posts,
+    posts: _.filter(posts.posts, { deleted: false }),
     selectedCategory: categories.selectedCategory,
   }
 }

@@ -37,17 +37,11 @@ class CategoryMenu extends Component {
 
 
 
-function mapStateToProps({ categories, selectedCategory }) {
+function mapStateToProps({ categories }) {
   return {
     categories: categories.categories.categories
   }
 }
-
-//alternatively:
-
-//function mapDispatchToProps(dispatch) {
-//  return { loadCategories: () => fetchCategories() }
-//}
 
 
 

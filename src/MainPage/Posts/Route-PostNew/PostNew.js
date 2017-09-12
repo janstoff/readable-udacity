@@ -6,12 +6,18 @@ import { Field, reduxForm } from 'redux-form';
 import './PostNew.css';
 
 import { createPost } from '../postsActions';
+import { fetchCategories } from '../../CategoryMenu/categoriesActions';
 
 const uuid = require('uuid/v4')
 
 
 
 class PostNew extends Component {
+
+  componentWillMount() {
+    this.props.dispatch(fetchCategories())
+  }
+
 
   renderField(field) {
     // field argument contains eventhandlers which make sure the <Field/> element knows
@@ -40,10 +46,38 @@ class PostNew extends Component {
     )
   }
 
+  renderDropDown(field) {
+
+    const { meta: { touched, error } } = field;
+
+    const className = `form-group ${touched && error ? 'has-danger' : ' '}`;
+
+    return (
+      <div className={className}>
+        <select {...field.input}>
+          <option>Select a category</option>
+          <option value="react">React</option>
+          <option value="redux">Redux</option>
+          <option value="udacity">Udacity</option>
+        </select>
+        <div>
+          {touched ? error : ' '}
+        </div>
+      </div>
+
+    )
+  }
+
+
+
   onSubmit(values) {
     values.id = uuid();
     values.timestamp = Date.now();
-    this.props.dispatch(createPost(values));
+    this.props.dispatch(createPost(values, () => {
+      this.props.history.push('/');
+      // react router feature/prop which makes active routes available for navigation via history.push
+      // push in callback to trigger navigation after the API call has completed in order to avoid race condition
+    }));
   }
 
 
@@ -65,8 +99,7 @@ class PostNew extends Component {
                 />
                 <Field
                   name="category"
-                  placeholder="Category"
-                  component={this.renderField}
+                  component={this.renderDropDown}
                 />
                 <Field
                   name="body"
@@ -109,9 +142,16 @@ function validate(values) {
 }
 
 
+function mapStateToProps({ categories }) {
+  return {
+    categories: categories.categories.categories
+  }
+}
+
+
 export default reduxForm({
   validate: validate,
   form: 'NewPostForm'
 })(
-  withRouter(connect()(PostNew)
+  withRouter(connect(mapStateToProps)(PostNew)
 ));
