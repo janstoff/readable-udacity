@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import '../MainPage.css';
-import { fetchPosts, fetchPostsByCategory } from './postsActions';
-import PostDetail from './Route-PostDetail/PostDetail';
+import { timeConverter } from '../../utils/helpers';
+import { fetchPosts, fetchPostsByCategory, selectSortValue } from './postsActions';
 
 
 
@@ -21,23 +21,43 @@ class Posts extends Component {
     }
   }
 
+
   render() {
+
+
+    let sortedPosts
+      if(this.props.sortValue === 'latest') {
+        sortedPosts = _.orderBy(this.props.posts, ['timestamp'], ['desc'])
+      }
+      if (this.props.sortValue === 'popularity') {
+        sortedPosts = _.orderBy(this.props.posts, ['voteScore'], ['desc'])
+      }
+
+
 
     let visiblePosts
       if (this.props.selectedCategory !== ' ') {
-        visiblePosts = _.filter(this.props.posts, { category:  this.props.selectedCategory });
-      } else {
-        visiblePosts = this.props.posts;
+        visiblePosts = _.filter(sortedPosts, { category:  this.props.selectedCategory });
       }
+      else {
+        visiblePosts = sortedPosts;
+      }
+
 
     return (
       <div className="posts-wrapper">
+        <div className="posts-filter">Sort by...
+          <button className="btn" value="latest" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>latest</button>
+          <button className="btn" value="popularity" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>popularity</button>
+        </div>
         <div className="posts-grid">
           {visiblePosts && _.map(visiblePosts, (post) => {
              return (
-               <li key={post.id} className="post">
+               <div key={post.id} className="post">
                 <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
-              </li>
+                  <div>{timeConverter(post.timestamp)}</div>
+                  <div>{post.voteScore}</div>
+              </div>
              )
           })}
           <Link to="/posts/new">
@@ -55,6 +75,7 @@ function mapStateToProps({ posts, categories }) {
   return {
     posts: _.filter(posts.posts, { deleted: false }),
     selectedCategory: categories.selectedCategory,
+    sortValue: posts.sortValue,
   }
 }
 

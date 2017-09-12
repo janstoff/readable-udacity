@@ -12,7 +12,7 @@ import {
   FETCH_POST_REJECTED,
   CREATE_POST,
   DELETE_POST,
-  FILTER_POSTS_BY_CATEGORY
+  SELECT_SORT_VALUE
 } from './postsActions';
 
 
@@ -21,6 +21,7 @@ const initialState = {
   fetching: false,
   fetched: false,
   posts: {},
+  sortValue: "latest",
   error: null,
 };
 
@@ -62,8 +63,8 @@ export default function postsReducer(state=initialState, action) {
     case DELETE_POST: {
       return { ...state, posts: { ...state.posts, [action.payload.deleted]: true } }
     }
-    case FILTER_POSTS_BY_CATEGORY: {
-      return { ...state, /*posts: _.filter(state.posts, { [state.posts.category]: action.payload } )*/ }
+    case SELECT_SORT_VALUE: {
+      return { ...state, sortValue: action.payload }
     }
     default:
     return state;

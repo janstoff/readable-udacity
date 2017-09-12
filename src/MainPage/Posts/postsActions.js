@@ -20,7 +20,9 @@ export const CREATE_POST_REJECTED = 'CREATE_POST_REJECTED';
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_POST_REJECTED = 'DELETE_POST_REJECTED';
 
-export const FILTER_POSTS_BY_CATEGORY = 'FILTER_POSTS_BY_CATEGORY';
+export const SELECT_SORT_VALUE = 'SELECT_SORT_VALUE';
+
+
 
 
 export function fetchPosts() {
@@ -90,9 +92,9 @@ export function deletePost(id, callback) {
 }
 
 
-export function filterPostsByCategory(category) {
+export function selectSortValue(sortValue) {
   return {
-    type: FILTER_POSTS_BY_CATEGORY,
-    payload: category
+    type: SELECT_SORT_VALUE,
+    payload: sortValue,
   }
 }

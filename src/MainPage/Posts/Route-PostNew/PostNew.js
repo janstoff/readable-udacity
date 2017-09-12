@@ -6,7 +6,6 @@ import { Field, reduxForm } from 'redux-form';
 import './PostNew.css';
 
 import { createPost } from '../postsActions';
-import { fetchCategories } from '../../CategoryMenu/categoriesActions';
 
 const uuid = require('uuid/v4')
 
