@@ -47,8 +47,8 @@ class Posts extends Component {
     return (
       <div className="posts-wrapper">
         <div className="posts-filter">Sort by...
-          <button className="btn" value="latest" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>latest</button>
-          <button className="btn" value="popularity" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>popularity</button>
+          <button className="btn btn-default" value="latest" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>latest</button>
+          <button className="btn btn-default" value="popularity" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>popularity</button>
         </div>
         <div className="posts-grid">
           {visiblePosts && _.map(visiblePosts, (post) => {
