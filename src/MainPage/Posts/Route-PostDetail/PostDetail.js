@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../../MainPage.css';
 
 import { timeConverter } from '../../../utils/helpers';
-import { fetchSinglePost, deletePost } from '../postsActions';
+import { fetchSinglePost, deletePost, voteOnPost } from '../postsActions';
 //const uuid = require('uuid/v1')
 
 
@@ -26,6 +26,13 @@ class PostDetail extends Component {
     }));
   }
 
+  onClickVote(vote) {
+    const { id } = this.props.match.params;
+    this.props.dispatch(voteOnPost(id, vote));
+    console.log(id, vote);
+  }
+
+
   render() {
 
     if (!this.props.post) {
@@ -45,8 +52,8 @@ class PostDetail extends Component {
               <div className="post-date-time"> posted: {timeConverter(this.props.post.timestamp)}</div>
               <div className="post-content">{this.props.post.body}</div>
               <div className="post-interaction">
-                <button>upvote</button>
-                <button>downvote</button>
+                <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
+                <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
                 <button>add comment</button>
               </div>
             </div>

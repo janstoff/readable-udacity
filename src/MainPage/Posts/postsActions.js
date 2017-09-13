@@ -22,6 +22,8 @@ export const DELETE_POST_REJECTED = 'DELETE_POST_REJECTED';
 
 export const SELECT_SORT_VALUE = 'SELECT_SORT_VALUE';
 
+export const VOTE_ON_POST = 'VOTE_ON_POST';
+
 
 
 
@@ -75,6 +77,16 @@ export function createPost(postToSubmit, callback) {
         dispatch({type: CREATE_POST_REJECTED, payload: error})
       })
       .then(() => callback())
+  }
+}
+
+
+export function voteOnPost(id, vote) {
+  return function(dispatch) {
+    axios.post(`${API_URL}/posts/${id}`, { option: vote }, { headers: headers })
+      .then((response) => {
+        dispatch({type: VOTE_ON_POST, payload: response.data})
+      })
   }
 }
 

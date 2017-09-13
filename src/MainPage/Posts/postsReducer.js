@@ -12,7 +12,8 @@ import {
   FETCH_POST_REJECTED,
   CREATE_POST,
   DELETE_POST,
-  SELECT_SORT_VALUE
+  SELECT_SORT_VALUE,
+  VOTE_ON_POST
 } from './postsActions';
 
 
@@ -65,6 +66,9 @@ export default function postsReducer(state=initialState, action) {
     }
     case SELECT_SORT_VALUE: {
       return { ...state, sortValue: action.payload }
+    }
+    case VOTE_ON_POST: {
+      return { ...state, posts: { ...state.posts, voteScore: action.payload.voteScore }}
     }
     default:
     return state;
