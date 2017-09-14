@@ -101,7 +101,7 @@ class PostNew extends Component {
                   placeholder="What is on your mind..."
                   component={this.renderField}
                 />
-                <button type='submit' className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
               </form>
               <Link to='/' className="btn btn-secondary">back</Link>
             </div>
@@ -136,11 +136,14 @@ function validate(values) {
   // redux-form assumes the form is invalid
 }
 
+function mapStateToProps({ posts }, ownProps) {
+  return { initialValues: posts.posts[ownProps.match.params.id] };
+}
 
 
 export default reduxForm({
   validate: validate,
   form: 'NewPostForm'
 })(
-  withRouter(connect()(PostNew)
+  withRouter(connect(mapStateToProps)(PostNew)
 ));
