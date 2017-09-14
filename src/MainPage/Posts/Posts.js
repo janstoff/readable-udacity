@@ -46,17 +46,34 @@ class Posts extends Component {
 
     return (
       <div className="posts-wrapper">
+
         <div className="posts-filter">Sort by...
           <button className="btn btn-default" value="latest" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>latest</button>
           <button className="btn btn-default" value="popularity" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>popularity</button>
         </div>
+
         <div className="posts-grid">
           {visiblePosts && _.map(visiblePosts, (post) => {
              return (
                <div key={post.id} className="post">
                 <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
-                  <div>{timeConverter(post.timestamp)}</div>
-                  <div>{post.voteScore}</div>
+                <div className="post-author">Author:   {post.author}</div>
+                <div className="post-date-time">created:   {timeConverter(post.timestamp)}</div>
+                <div># of Comments</div>
+                <div>Rating:    {post.voteScore}</div>
+                <div className="post-actions">
+                  <button
+                    className="btn btn-danger delete-post"
+                    >Delete Post
+                  </button>
+                  <Link to={`/${post.id}/edit`} className="btn btn-default edit-post">
+                    Edit Post
+                  </Link>
+                </div>
+                <div className="post-voting">
+                  <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
+                  <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
+                </div>
               </div>
              )
           })}
@@ -64,6 +81,7 @@ class Posts extends Component {
             <button>add post</button>
           </Link>
         </div>
+
       </div>
     )
   }

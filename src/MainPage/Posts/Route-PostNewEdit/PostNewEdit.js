@@ -3,15 +3,22 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
-import './PostNew.css';
+import './PostNewEdit.css';
 
-import { createPost } from '../postsActions';
+import { createPost, fetchSinglePost } from '../postsActions';
 
 const uuid = require('uuid/v4')
 
 
 
-class PostNew extends Component {
+class PostNewEdit extends Component {
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    //picking up the posts id from the URL with the help of react router
+    this.props.dispatch(fetchSinglePost(id));
+  }
+
 
 
   renderField(field) {
@@ -50,7 +57,7 @@ class PostNew extends Component {
     return (
       <div className={className}>
         <select {...field.input}>
-          <option>Select a category</option>
+          <option>{field.placeholder}</option>
           <option value="react">React</option>
           <option value="redux">Redux</option>
           <option value="udacity">Udacity</option>
@@ -77,31 +84,34 @@ class PostNew extends Component {
 
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, submitting, invalid, initialValues } = this.props;
+
+    console.log(initialValues);
 
     return (
             <div className="form-wrapper">
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                   name="title"
-                  placeholder="Title"
+                  placeholder={initialValues ? initialValues.title : "Title"}
                   component={this.renderField}
                 />
                 <Field
                   name="author"
-                  placeholder="Author"
+                  placeholder={initialValues ? initialValues.author : "Author"}
                   component={this.renderField}
                 />
                 <Field
                   name="category"
+                  placeholder={initialValues ? initialValues.category : "Select a category"}
                   component={this.renderDropDown}
                 />
                 <Field
                   name="body"
-                  placeholder="What is on your mind..."
+                  placeholder={initialValues ? initialValues.body : "What is on your mind..."}
                   component={this.renderField}
                 />
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" disabled={pristine || submitting || invalid} className="btn btn-primary">Submit</button>
               </form>
               <Link to='/' className="btn btn-secondary">back</Link>
             </div>
@@ -143,7 +153,7 @@ function mapStateToProps({ posts }, ownProps) {
 
 export default reduxForm({
   validate: validate,
-  form: 'NewPostForm'
+  form: 'NewPostForm',
 })(
-  withRouter(connect(mapStateToProps)(PostNew)
+  withRouter(connect(mapStateToProps)(PostNewEdit)
 ));

@@ -9,7 +9,7 @@ import Footer from './Footer';
 import Header from './Header';
 import MainPage from '../MainPage/MainPage';
 import PostDetail from '../MainPage/Posts/Route-PostDetail/PostDetail';
-import PostNew from '../MainPage/Posts/Route-PostNew/PostNew';
+import PostNewEdit from '../MainPage/Posts/Route-PostNewEdit/PostNewEdit';
 
 
 class App extends Component {
@@ -18,7 +18,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <Switch>
-          <Route path="/posts/new" component={PostNew} />
+          <Route path="/posts/new" component={PostNewEdit} />
+          <Route path="/:id/edit" component={PostNewEdit} />
           <Route path="/:category/:id" component={PostDetail} />
           <Route path="/:category" component={MainPage} />
           <Route path="/" component={MainPage} />

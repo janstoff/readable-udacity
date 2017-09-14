@@ -22,7 +22,7 @@ const initialState = {
   fetching: false,
   fetched: false,
   posts: {},
-  sortValue: "latest",
+  sortValue: "popularity",
   error: null,
 };
 

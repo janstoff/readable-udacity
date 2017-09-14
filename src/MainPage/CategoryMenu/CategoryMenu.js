@@ -18,7 +18,7 @@ class CategoryMenu extends Component {
   render() {
 
     return (
-      <div className="categoryMenu">
+      <div>
         {this.props.categories && this.props.categories.map((category) =>
           <Link to={category.name} className="btn" key={category.name}>
             <Button

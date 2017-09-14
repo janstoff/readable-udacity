@@ -29,11 +29,12 @@ class PostDetail extends Component {
   onClickVote(vote) {
     const { id } = this.props.match.params;
     this.props.dispatch(voteOnPost(id, vote));
-    console.log(id, vote);
   }
 
 
   render() {
+
+    const { id } = this.props.match.params;
 
     if (!this.props.post) {
       return <div>Loading...</div>
@@ -41,11 +42,17 @@ class PostDetail extends Component {
 
     return (
           <div>
+
             <button
               className="btn btn-danger pull-right"
               onClick={this.onClickDelete.bind(this)}
               >Delete Post
             </button>
+
+            <Link to={`/${id}/edit`} className="btn btn-info pull-right">
+              Edit Post
+            </Link>
+
             <div className="post">
               <div className="post-title">{this.props.post.title}</div>
               <div className="post-author">{this.props.post.author}</div>
@@ -57,7 +64,9 @@ class PostDetail extends Component {
                 <button>add comment</button>
               </div>
             </div>
+
             <Link to='/'>back</Link>
+
           </div>
     )
   }
