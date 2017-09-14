@@ -33,7 +33,7 @@ class PostDetail extends Component {
 
 
   render() {
-
+    const { post } = this.props;
     const { id } = this.props.match.params;
 
     if (!this.props.post) {
@@ -43,27 +43,29 @@ class PostDetail extends Component {
     return (
           <div>
 
-            <button
-              className="btn btn-danger pull-right"
-              onClick={this.onClickDelete.bind(this)}
-              >Delete Post
-            </button>
-
-            <Link to={`/${id}/edit`} className="btn btn-info pull-right">
-              Edit Post
-            </Link>
-
-            <div className="post">
-              <div className="post-title">{this.props.post.title}</div>
-              <div className="post-author">{this.props.post.author}</div>
-              <div className="post-date-time"> posted: {timeConverter(this.props.post.timestamp)}</div>
-              <div className="post-content">{this.props.post.body}</div>
-              <div className="post-interaction">
-                <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
-                <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
-                <button>add comment</button>
-              </div>
-            </div>
+            <div key={post.id} className="post">
+             <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
+             <div className="post-author">Author:   {post.author}</div>
+             <div className="post-date-time">created:   {timeConverter(post.timestamp)}</div>
+             <div># of Comments</div>
+             <div>Rating:    {post.voteScore}</div>
+             <div className="post-actions">
+               <button
+                 className="btn btn-danger delete-post"
+                 onClick={this.onClickDelete.bind(this)}
+                 >Delete Post
+               </button>
+               <Link to={`/${id}/edit`} className="btn btn-default edit-post">
+                 Edit Post
+               </Link>
+             </div>
+             <div className="post-content">{post.body}</div>
+             <div className="post-voting">
+               <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
+               <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
+             </div>
+             <button>add comment</button>
+           </div>
 
             <Link to='/'>back</Link>
 

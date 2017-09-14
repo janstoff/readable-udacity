@@ -16,7 +16,9 @@ class PostNewEdit extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     //picking up the posts id from the URL with the help of react router
-    this.props.dispatch(fetchSinglePost(id));
+    if(id) {
+      this.props.dispatch(fetchSinglePost(id));
+    }
   }
 
 
@@ -86,7 +88,7 @@ class PostNewEdit extends Component {
   render() {
     const { handleSubmit, pristine, submitting, invalid, initialValues } = this.props;
 
-    console.log(initialValues);
+    //console.log(initialValues);
 
     return (
             <div className="form-wrapper">

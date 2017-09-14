@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import '../MainPage.css';
 import { timeConverter } from '../../utils/helpers';
-import { fetchPosts, fetchPostsByCategory, selectSortValue } from './postsActions';
+import { fetchPosts, fetchPostsByCategory, selectSortValue, deletePost, voteOnPost } from './postsActions';
 
 
 
@@ -19,6 +19,13 @@ class Posts extends Component {
     } else {
       this.props.dispatch(fetchPosts())
     }
+  }
+
+
+  onClickDelete(id) {
+    this.props.dispatch(deletePost(id, () => {
+      this.props.history.push('/');
+    }));
   }
 
 
@@ -64,6 +71,7 @@ class Posts extends Component {
                 <div className="post-actions">
                   <button
                     className="btn btn-danger delete-post"
+                    onClick={() => this.onClickDelete(post.id)}
                     >Delete Post
                   </button>
                   <Link to={`/${post.id}/edit`} className="btn btn-default edit-post">
@@ -71,8 +79,8 @@ class Posts extends Component {
                   </Link>
                 </div>
                 <div className="post-voting">
-                  <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
-                  <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
+                  <button value="upVote" onClick={(event) => this.props.dispatch(voteOnPost(post.id, event.target.value))}>upvote</button>
+                  <button value="downVote" onClick={(event) => this.props.dispatch(voteOnPost(post.id, event.target.value))}>downvote</button>
                 </div>
               </div>
              )
