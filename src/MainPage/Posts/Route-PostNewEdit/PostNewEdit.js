@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, initialize } from 'redux-form';
 
 import './PostNewEdit.css';
 
@@ -15,12 +15,24 @@ class PostNewEdit extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
+    const { post } = this.props;
     //picking up the posts id from the URL with the help of react router
     if(id) {
       this.props.dispatch(fetchSinglePost(id));
+      this.handleInitialize();
     }
   }
 
+  handleInitialize() {
+    const { post } = this.props;
+    const initData = {
+      "title": post.title,
+      "author": post.author,
+      "category": post.category,
+      "body": post.body,
+    };
+    this.props.initialize(initData);
+  }
 
 
   renderField(field) {
@@ -88,32 +100,32 @@ class PostNewEdit extends Component {
   render() {
     const { handleSubmit, pristine, submitting, invalid, initialValues } = this.props;
 
-    //console.log(initialValues);
+    console.log(initialValues);
 
     return (
             <div className="form-wrapper">
               <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                   name="title"
-                  placeholder={initialValues ? initialValues.title : "Title"}
+                  placeholder="Title"
                   component={this.renderField}
                 />
                 <Field
                   name="author"
-                  placeholder={initialValues ? initialValues.author : "Author"}
+                  placeholder="Author"
                   component={this.renderField}
                 />
                 <Field
                   name="category"
-                  placeholder={initialValues ? initialValues.category : "Select a category"}
+                  placeholder="Select a category"
                   component={this.renderDropDown}
                 />
                 <Field
                   name="body"
-                  placeholder={initialValues ? initialValues.body : "What is on your mind..."}
+                  placeholder="What is on your mind..."
                   component={this.renderField}
                 />
-                <button type="submit" disabled={pristine || submitting || invalid} className="btn btn-primary">Submit</button>
+                <button type="submit" disabled={submitting || invalid} className="btn btn-primary">Submit</button>
               </form>
               <Link to='/' className="btn btn-secondary">back</Link>
             </div>
@@ -149,7 +161,7 @@ function validate(values) {
 }
 
 function mapStateToProps({ posts }, ownProps) {
-  return { initialValues: posts.posts[ownProps.match.params.id] };
+  return { post: posts.posts[ownProps.match.params.id] };
 }
 
 

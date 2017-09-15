@@ -28,7 +28,7 @@
 }
 
 .post-filter {
-  color: #ede4e4
+  color: #bfc6d9
 }
 .posts-grid {
   display: grid;
@@ -41,7 +41,7 @@
   grid-column: 1/4;
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
-  background: #ede4e4;
+  background: #e8effa;
   margin-top: 2px;
   padding-top: 5px;
   justify-self: auto;
