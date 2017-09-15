@@ -5,7 +5,7 @@ import { Field, reduxForm, initialize } from 'redux-form';
 
 import './PostNewEdit.css';
 
-import { createPost, fetchSinglePost } from '../postsActions';
+import { createPost, editPost, fetchSinglePost } from '../postsActions';
 
 const uuid = require('uuid/v4')
 
@@ -87,13 +87,22 @@ class PostNewEdit extends Component {
 
 
   onSubmit(values) {
-    values.id = uuid();
-    values.timestamp = Date.now();
-    this.props.dispatch(createPost(values, () => {
-      this.props.history.push('/');
-      // react router feature/prop which makes active routes available for navigation via history.push
-      // push in callback to trigger navigation after the API call has completed in order to avoid race condition
-    }));
+    const { post } = this.props;
+    if(post) {
+      values.id = post.id;
+      values.timestamp = Date.now();
+      this.props.dispatch(editPost(values, () => {
+        this.props.history.push('/');
+      }));
+    } else {
+      values.id = uuid();
+      values.timestamp = Date.now();
+      this.props.dispatch(createPost(values, () => {
+        this.props.history.push('/');
+        // react router feature/prop which makes active routes available for navigation via history.push
+        // push in callback to trigger navigation after the API call has completed in order to avoid race condition
+      }));
+    }
   }
 
 

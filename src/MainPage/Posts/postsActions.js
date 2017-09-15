@@ -17,6 +17,9 @@ export const FETCH_POST_REJECTED = 'FETCH_POST_REJECTED';
 export const CREATE_POST = 'CREATE_POST';
 export const CREATE_POST_REJECTED = 'CREATE_POST_REJECTED';
 
+export const EDIT_POST = "EDIT_POST";
+export const EDIT_POST_REJECTED = "EDIT_POST_REJECTED";
+
 export const DELETE_POST = 'DELETE_POST';
 export const DELETE_POST_REJECTED = 'DELETE_POST_REJECTED';
 
@@ -79,6 +82,20 @@ export function createPost(postToSubmit, callback) {
       .then(() => callback())
   }
 }
+
+export function editPost(postToEdit, callback) {
+  return function(dispatch) {
+    axios.put(`${API_URL}/posts/${postToEdit.id}`, postToEdit, { headers: headers })
+      .then((response) => {
+        dispatch({type: EDIT_POST, payload: response.data})
+      })
+      .catch((error) => {
+        dispatch({type: EDIT_POST_REJECTED, payload: error})
+      })
+      .then(() => callback())
+  }
+}
+
 
 
 export function voteOnPost(id, vote) {

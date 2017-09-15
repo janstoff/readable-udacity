@@ -11,6 +11,7 @@ import {
   FETCH_POST_FULFILLED,
   FETCH_POST_REJECTED,
   CREATE_POST,
+  EDIT_POST,
   DELETE_POST,
   SELECT_SORT_VALUE,
   VOTE_ON_POST
@@ -69,6 +70,9 @@ export default function postsReducer(state=initialState, action) {
     case CREATE_POST: {
       return { ...state, posts: { ...state.posts, [action.payload.id]: action.payload } }
       //same as FETCH_POST
+    }
+    case EDIT_POST: {
+      return { ...state, posts: { ...state.posts, [action.payload.id]: action.payload } }
     }
     case DELETE_POST: {
       return {
