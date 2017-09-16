@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../../MainPage.css';
+import _ from 'lodash';
 
+import '../../MainPage.css';
+import Comments from '../Comments/Comments';
 import { timeConverter } from '../../../utils/helpers';
 import { fetchSinglePost, deletePost, voteOnPost } from '../postsActions';
-//const uuid = require('uuid/v1')
+import { fetchCommentsById } from '../Comments/commentsActions';
 
 
 
@@ -16,6 +18,7 @@ class PostDetail extends Component {
     const { id } = this.props.match.params;
     //picking up the posts id from the URL with the help of react router
     this.props.dispatch(fetchSinglePost(id));
+    this.props.dispatch(fetchCommentsById(id));
   }
 
   onClickDelete() {
@@ -33,7 +36,7 @@ class PostDetail extends Component {
 
 
   render() {
-    const { post } = this.props;
+    const { post, comments } = this.props;
     const { id } = this.props.match.params;
 
     if (!this.props.post) {
@@ -42,12 +45,11 @@ class PostDetail extends Component {
 
     return (
           <div>
-
             <div key={post.id} className="post">
              <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
              <div className="post-author">Author:   {post.author}</div>
              <div className="post-date-time">created:   {timeConverter(post.timestamp)}</div>
-             <div># of Comments</div>
+             <div>{Object.keys(comments).length} Comments</div>
              <div>Rating:    {post.voteScore}</div>
              <div className="post-actions">
                <button
@@ -60,22 +62,32 @@ class PostDetail extends Component {
                </Link>
              </div>
              <div className="post-content">{post.body}</div>
-             <div className="post-voting">
-               <button value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
-               <button value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
+             <div>
+               <button className="btn btn-default upvote-post" value="upVote" onClick={(event) => this.onClickVote(event.target.value)}>upvote</button>
+               <button className="btn btn-default downvote-post" value="downVote" onClick={(event) => this.onClickVote(event.target.value)}>downvote</button>
              </div>
-             <button>add comment</button>
            </div>
 
-            <Link to='/'>back</Link>
+            <Link to='/'>
+             <button className="go-back btn btn-default"></button>
+            </Link>
+
+            <Comments
+              comments={comments}
+            />
+
+            <button>add comment</button>
 
           </div>
     )
   }
 }
 
-function mapStateToProps({ posts }, ownProps) {
-  return { post: posts.posts[ownProps.match.params.id] };
+function mapStateToProps({ posts, comments }, ownProps) {
+  return {
+    post: posts.posts[ownProps.match.params.id] ,
+    comments: _.orderBy(_.filter(comments.comments, { parentId: ownProps.match.params.id }), ['timestamp'], ['desc']),
+  };
 }
 
 

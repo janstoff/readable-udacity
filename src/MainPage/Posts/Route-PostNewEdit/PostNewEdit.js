@@ -107,7 +107,7 @@ class PostNewEdit extends Component {
 
 
   render() {
-    const { handleSubmit, pristine, submitting, invalid, initialValues } = this.props;
+    const { handleSubmit, submitting, invalid, initialValues } = this.props;
 
     console.log(initialValues);
 

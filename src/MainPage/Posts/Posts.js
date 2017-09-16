@@ -3,9 +3,9 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import Post from './Post/Post';
 import '../MainPage.css';
-import { timeConverter } from '../../utils/helpers';
-import { fetchPosts, fetchPostsByCategory, selectSortValue, deletePost, voteOnPost } from './postsActions';
+import { fetchPosts, fetchPostsByCategory, selectSortValue } from './postsActions';
 
 
 
@@ -22,15 +22,7 @@ class Posts extends Component {
   }
 
 
-  onClickDelete(id) {
-    this.props.dispatch(deletePost(id, () => {
-      this.props.history.push('/');
-    }));
-  }
-
-
   render() {
-
 
     let sortedPosts
       if(this.props.sortValue === 'latest') {
@@ -39,8 +31,6 @@ class Posts extends Component {
       if (this.props.sortValue === 'popularity') {
         sortedPosts = _.orderBy(this.props.posts, ['voteScore'], ['desc'])
       }
-
-
 
     let visiblePosts
       if (this.props.selectedCategory !== ' ') {
@@ -62,27 +52,10 @@ class Posts extends Component {
         <div className="posts-grid">
           {visiblePosts && _.map(visiblePosts, (post) => {
              return (
-               <div key={post.id} className="post">
-                <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
-                <div className="post-author">Author:   {post.author}</div>
-                <div className="post-date-time">created:   {timeConverter(post.timestamp)}</div>
-                <div># of Comments</div>
-                <div>Rating:    {post.voteScore}</div>
-                <div className="post-actions">
-                  <button
-                    className="btn btn-danger delete-post"
-                    onClick={() => this.onClickDelete(post.id)}
-                    >Delete Post
-                  </button>
-                  <Link to={`/${post.id}/edit`} className="btn btn-default edit-post">
-                    Edit Post
-                  </Link>
-                </div>
-                <div className="post-voting">
-                  <button value="upVote" onClick={(event) => this.props.dispatch(voteOnPost(post.id, event.target.value))}>upvote</button>
-                  <button value="downVote" onClick={(event) => this.props.dispatch(voteOnPost(post.id, event.target.value))}>downvote</button>
-                </div>
-              </div>
+               <Post
+                 post={post}
+                 key={post.id}
+               />
              )
           })}
           <Link to="/posts/new">

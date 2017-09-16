@@ -107,7 +107,43 @@
   font-size: 0;
 }
 
-.post-voting {
-  grid-column: 2/4;
-  justify-self: middle;
+.upvote-post {
+  grid-column: 4/4;
+  grid-row: 3/3;
+  width: 20px;
+  height: 20px;
+  justify-self: right;
+  margin-right: 1px;
+  background-image: url('../style-elements/icons/arrow-up.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  font-size: 0;
+}
+
+.downvote-post {
+  grid-column: 4/4;
+  grid-row: 3/3;
+  width: 20px;
+  height: 20px;
+  justify-self: left;
+  background-image: url('../style-elements/icons/arrow-down.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  font-size: 0;
+}
+
+.go-back {
+  display: grid;
+  grid-column: 1/1;
+  width: 40px;
+  height: 60px;
+  background-image: url('../style-elements/icons/arrow-back.svg');
+  border-color: #ddd;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  font-size: 70;
+  margin-top: 3px;
 }
