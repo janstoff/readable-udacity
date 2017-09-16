@@ -10,6 +10,7 @@ import Header from './Header';
 import MainPage from '../MainPage/MainPage';
 import PostDetail from '../MainPage/Posts/Route-PostDetail/PostDetail';
 import PostNewEdit from '../MainPage/Posts/Route-PostNewEdit/PostNewEdit';
+import CommentNewEdit from '../MainPage/Posts/Comments/CommentNewEdit';
 
 
 class App extends Component {
@@ -19,7 +20,9 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/posts/new" component={PostNewEdit} />
+          <Route path="/:id/newcomment" component={CommentNewEdit} />
           <Route path="/:id/edit" component={PostNewEdit} />
+          <Route path="/:id/:commentId/edit" component={CommentNewEdit} />
           <Route path="/:category/:id" component={PostDetail} />
           <Route path="/:category" component={MainPage} />
           <Route path="/" component={MainPage} />

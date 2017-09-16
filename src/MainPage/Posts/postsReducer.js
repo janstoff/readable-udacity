@@ -51,7 +51,7 @@ export default function postsReducer(state=initialState, action) {
     case FETCH_POST: {
       return { ...state, fetching: true }
     }
-    case FETCH_POST_FULFILLED: {``
+    case FETCH_POST_FULFILLED: {
       return {
         ...state,
         fetching: false,

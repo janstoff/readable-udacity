@@ -107,9 +107,7 @@ class PostNewEdit extends Component {
 
 
   render() {
-    const { handleSubmit, submitting, invalid, initialValues } = this.props;
-
-    console.log(initialValues);
+    const { handleSubmit, submitting, invalid } = this.props;
 
     return (
             <div className="form-wrapper">

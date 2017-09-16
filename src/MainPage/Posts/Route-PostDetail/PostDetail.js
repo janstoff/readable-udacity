@@ -73,10 +73,9 @@ class PostDetail extends Component {
             </Link>
 
             <Comments
+              post={post}
               comments={comments}
             />
-
-            <button>add comment</button>
 
           </div>
     )
@@ -86,7 +85,7 @@ class PostDetail extends Component {
 function mapStateToProps({ posts, comments }, ownProps) {
   return {
     post: posts.posts[ownProps.match.params.id] ,
-    comments: _.orderBy(_.filter(comments.comments, { parentId: ownProps.match.params.id }), ['timestamp'], ['desc']),
+    comments: _.orderBy(_.filter(comments.comments, { parentId: ownProps.match.params.id, deleted: false }), ['timestamp'], ['desc']),
   };
 }
 
