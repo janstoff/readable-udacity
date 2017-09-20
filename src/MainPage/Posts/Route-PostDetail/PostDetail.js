@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
-import '../../MainPage.css';
+import './PostDetail.css';
 import Comments from '../Comments/Comments';
 import { timeConverter } from '../../../utils/helpers';
 import { fetchSinglePost, deletePost, voteOnPost } from '../postsActions';
@@ -39,12 +39,12 @@ class PostDetail extends Component {
     const { post, comments } = this.props;
     const { id } = this.props.match.params;
 
-    if (!this.props.post) {
+    if (!post) {
       return <div>Loading...</div>
     }
 
     return (
-          <div>
+          <div className="wrapper">
             <div key={post.id} className="post">
              <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
              <div className="post-author">Author:   {post.author}</div>

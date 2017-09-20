@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import { createComment, editComment, fetchComment } from './commentsActions';
 
@@ -93,7 +93,7 @@ class CommentNewEdit extends Component {
                 />
                 <button type="submit" disabled={submitting || invalid} className="btn btn-primary">Submit</button>
               </form>
-              <Link to={`/${post.category}/${post.id}/`} className="btn btn-secondary">back</Link>
+              <button onClick={this.props.history.goBack} className="btn btn-secondary">back</button>
             </div>
     )
   }

@@ -1,41 +1,17 @@
-
-/*MainPage Component */
+/* PostDetail Component */
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  grid-column-gap: 3px;
-  margin-top: 1%;
-  margin-bottom: 50px;
-  font-size: 14px;
+  display:grid;
+  grid-template-columns: 1fr 12fr;
 }
 
-.wrapper > div {
-  background: #f5f5f5;
-  padding:1em;
-}
-
-
-/* CategoryMenu Component */
-.category {
-  background: #dde5f0;
-  justify-self: start;
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-/* Posts Component */
-.post-filter {
-  color: #bfc6d9
-}
-
-/* Post Component*/
 .post {
+  grid-column: 2/2;
   display: grid;
   grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
   background: #e8effa;
   margin-top: 2px;
-  margin-bottom: 6px;
   padding-top: 5px;
+  justify-self: auto;
 }
 
 .post-title {
@@ -62,18 +38,12 @@
   font-size: 12px;
 }
 
-.post-no-of-comments {
-  grid-column: 3/3;
+.post-content {
+  grid-column: 1/4;
   justify-self: start;
-  font-size: 14px;
+  padding-left: 2%;
+  font-size: 12px;
 }
-
-.post-rating {
-  grid-column: 4/4;
-  justify-self: start;
-  font-size: 14px;
-}
-
 
 .post-actions {
   display: grid;
@@ -84,7 +54,7 @@
   grid-row: 1/1;
   width: 20px;
   height: 30px;
-  background-image: url('../style-elements/icons/delete.png');
+  background-image: url('../../../style-elements/icons/delete.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 25px;
@@ -93,11 +63,11 @@
 }
 
 .edit-post {
-  grid-column: 5/5;
+  grid-column: 4/5;
   grid-row: 1/1;
   width: 20px;
   height: 30px;
-  background-image: url('../style-elements/icons/edit.png');
+  background-image: url('../../../style-elements/icons/edit.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -111,7 +81,7 @@
   height: 20px;
   justify-self: right;
   margin-right: 1px;
-  background-image: url('../style-elements/icons/arrow-up.png');
+  background-image: url('../../../style-elements/icons/arrow-up.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
@@ -124,9 +94,23 @@
   width: 20px;
   height: 20px;
   justify-self: left;
-  background-image: url('../style-elements/icons/arrow-down.png');
+  background-image: url('../../../style-elements/icons/arrow-down.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 20px;
   font-size: 0;
+}
+
+.go-back {
+  display: grid;
+  grid-column: 1/1;
+  width: 40px;
+  height: 60px;
+  background-image: url('../../../style-elements/icons/arrow-back.svg');
+  border-color: #ddd;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  font-size: 70;
+  margin-top: 3px;
 }

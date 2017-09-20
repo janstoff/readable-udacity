@@ -5,36 +5,31 @@ import _ from 'lodash';
 
 import Post from './Post/Post';
 import '../MainPage.css';
-import { fetchPosts, fetchPostsByCategory, selectSortValue } from './postsActions';
+import { fetchPosts, selectSortValue } from './postsActions';
 
 
 
 class Posts extends Component {
 
   componentWillMount() {
-    const { category } = this.props.match.params;
-
-    if(category) {
-      this.props.dispatch(fetchPostsByCategory(category))
-    } else {
-      this.props.dispatch(fetchPosts())
-    }
+    this.props.dispatch(fetchPosts())
   }
 
-
   render() {
+    const { category } = this.props.match.params;
+    const { sortValue, posts } = this.props;
 
     let sortedPosts
-      if(this.props.sortValue === 'latest') {
-        sortedPosts = _.orderBy(this.props.posts, ['timestamp'], ['desc'])
+      if(sortValue === 'latest') {
+        sortedPosts = _.orderBy(posts, ['timestamp'], ['desc'])
       }
-      if (this.props.sortValue === 'popularity') {
-        sortedPosts = _.orderBy(this.props.posts, ['voteScore'], ['desc'])
+      if (sortValue === 'popularity') {
+        sortedPosts = _.orderBy(posts, ['voteScore'], ['desc'])
       }
 
     let visiblePosts
-      if (this.props.selectedCategory !== ' ') {
-        visiblePosts = _.filter(sortedPosts, { category:  this.props.selectedCategory });
+      if (category) {
+        visiblePosts = _.filter(sortedPosts, { category:  category });
       }
       else {
         visiblePosts = sortedPosts;
@@ -49,7 +44,7 @@ class Posts extends Component {
           <button className="btn btn-default" value="popularity" onClick={(event) => this.props.dispatch(selectSortValue(event.target.value))}>popularity</button>
         </div>
 
-        <div className="posts-grid">
+        <div>
           {visiblePosts && _.map(visiblePosts, (post) => {
              return (
                <Post
@@ -73,7 +68,6 @@ class Posts extends Component {
 function mapStateToProps({ posts, categories }) {
   return {
     posts: _.filter(posts.posts, { deleted: false }),
-    selectedCategory: categories.selectedCategory,
     sortValue: posts.sortValue,
   }
 }

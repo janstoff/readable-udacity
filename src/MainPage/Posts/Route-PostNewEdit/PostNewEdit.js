@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Field, reduxForm, initialize } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import './PostNewEdit.css';
 
@@ -15,16 +15,17 @@ class PostNewEdit extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    const { post } = this.props;
-    //picking up the posts id from the URL with the help of react router
+
     if(id) {
-      this.props.dispatch(fetchSinglePost(id));
-      this.handleInitialize();
+      this.props.fetchSinglePost(id).then(
+        () => this.handleInitialize()
+      )
     }
   }
 
   handleInitialize() {
     const { post } = this.props;
+
     const initData = {
       "title": post.title,
       "author": post.author,
@@ -107,7 +108,9 @@ class PostNewEdit extends Component {
 
 
   render() {
-    const { handleSubmit, submitting, invalid } = this.props;
+    const { handleSubmit, submitting, invalid, post } = this.props;
+    const { id } = this.props.match.params;
+
 
     return (
             <div className="form-wrapper">
@@ -134,7 +137,7 @@ class PostNewEdit extends Component {
                 />
                 <button type="submit" disabled={submitting || invalid} className="btn btn-primary">Submit</button>
               </form>
-              <Link to='/' className="btn btn-secondary">back</Link>
+              <button onClick={this.props.history.goBack} className="btn btn-secondary">back</button>
             </div>
     )
   }
@@ -176,5 +179,5 @@ export default reduxForm({
   validate: validate,
   form: 'NewPostForm',
 })(
-  withRouter(connect(mapStateToProps)(PostNewEdit)
+  withRouter(connect(mapStateToProps, { fetchSinglePost })(PostNewEdit)
 ));

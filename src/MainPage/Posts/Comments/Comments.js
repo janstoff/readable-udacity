@@ -24,7 +24,7 @@ class Comments extends Component {
     return(
       <div>
         <Link to={`/${post.id}/newcomment`}>
-          <button className="btn btn-default">add comment</button>
+          <button className="btn btn-default add-comment">add comment</button>
         </Link>
 
         <div className="comments-grid">
@@ -43,7 +43,7 @@ class Comments extends Component {
                   className="btn btn-danger delete-comment"
                   onClick={() => this.onClickDelete(comment.id)}
                   ></button>
-                  
+
                 <Link
                   to={`/${post.id}/${comment.id}/edit`}
                   className="btn btn-default edit-comment"

@@ -1,6 +1,6 @@
 .comments-grid {
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 1fr 14fr 1fr;
   grid-gap: 1em;
 }
 
@@ -106,4 +106,8 @@
 .comment-voting {
   grid-column: 3/5;
   justify-self: middle;
+}
+
+.add-comment {
+  margin-bottom: 6px;
 }

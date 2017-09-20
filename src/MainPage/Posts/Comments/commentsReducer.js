@@ -32,8 +32,11 @@ export default function commentsReducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        comments: _.mapKeys(action.payload, 'id')
-      };
+        comments: {
+           ...state.comments,
+           [action.payload.parentId]: action.payload,
+         }      
+       };
     }
     case FETCH_COMMENTS_REJECTED: {
       return {

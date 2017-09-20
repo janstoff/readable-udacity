@@ -4,6 +4,7 @@ import { deletePost, voteOnPost } from '../postsActions';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
+import '../../MainPage.css';
 import { fetchCommentsById } from '../Comments/commentsActions';
 import { timeConverter } from '../../../utils/helpers';
 
@@ -25,15 +26,15 @@ class Post extends Component {
   render() {
     const { post, comments } = this.props;
 
-    //console.log(Object.keys(_.filter(comments, {parentId: post.id})).length);
+    let commentsPerPost = Object.keys(_.filter(comments, {parentId: post.id, deleted: false})).length;
 
     return(
       <div key={post.id} className="post">
        <Link to={`/${post.category}/${post.id}`} className="post-title">{post.title}</Link>
        <div className="post-author">Author:   {post.author}</div>
        <div className="post-date-time">created:   {timeConverter(post.timestamp)}</div>
-       <div>Comments</div>
-       <div>Rating:    {post.voteScore}</div>
+       <div className="post-no-of-comments">{commentsPerPost} Comments</div>
+       <div className="post-rating">Rating:    {post.voteScore}</div>
        <div className="post-actions">
          <button
            className="btn btn-danger delete-post"
@@ -55,7 +56,7 @@ class Post extends Component {
 
 function mapStateToProps({ comments }) {
   return {
-    comments: comments.comments,
+    comments: comments.comments
   };
 }
 

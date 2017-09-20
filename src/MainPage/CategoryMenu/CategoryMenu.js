@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import '../MainPage.css';
 
-import { fetchCategories, selectCategory } from './categoriesActions';
+import { fetchCategories } from './categoriesActions';
 
 
 
@@ -20,16 +19,9 @@ class CategoryMenu extends Component {
     return (
       <div>
         {this.props.categories && this.props.categories.map((category) =>
-          <Link to={category.name} className="btn" key={category.name}>
-            <Button
-              block className='category'
-              value={category.name}
-              onClick={(event) => this.props.dispatch(selectCategory(event.target.value))}
-              >{category.name}
-            </Button>
-          </Link>
+          <Link to={category.name} className="btn category" key={category.name}>{category.name}</Link>
         )}
-        <Link to="/" className="btn btn-secondary" onClick={(event) => this.props.dispatch(selectCategory(" "))}>all</Link>
+        <Link to="/" className="btn btn-secondary">all</Link>
       </div>
     )
   }
