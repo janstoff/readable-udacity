@@ -1,36 +1,35 @@
 .form-wrapper {
-  margin-top: 5%;
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-bottom: 1%;
-  font-size: 14px;
+	margin-top: 5%;
+	margin-left: 15%;
+	margin-right: 15%;
+	margin-bottom: 1%;
+	font-size: 14px;
 }
 
 .create-post-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 3px;
-  grid-row-gap: 1px;
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto;
-
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 3px;
+	grid-row-gap: 1px;
+	padding: 20px;
+	max-width: 500px;
+	margin: 0 auto;
 }
 
 .create-post-details {
-  margin-left: 20px;
+	margin-left: 20px;
 }
 
 .post-input {
-  grid-column: 1/4;
-  margin: 2px;
+	grid-column: 1/4;
+	margin: 2px;
 }
 
 .post-body {
-  grid-column: 3/3;
-  margin: 2px;
+	grid-column: 3/3;
+	margin: 2px;
 }
 
 .has-danger {
-  color: #ac1b1b;
+	color: #ac1b1b;
 }
