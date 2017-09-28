@@ -9,14 +9,13 @@ const uuid = require('uuid/v4')
 
 class CommentNewEdit extends Component {
 	componentDidMount() {
-		const { id, commentId } = this.props.match.params
+		const { commentId } = this.props.match.params
 
 		if (commentId) {
-			//if the comment already exists...
-			this.props.dispatch(fetchComment(id))
-			// then...
-			this.handleInitialize()
-		}
+				this.props.fetchComment(commentId).then(() => this.handleInitialize())
+			} else {
+				this.handleInitialize()
+			}
 	}
 
 	handleInitialize() {
@@ -127,4 +126,4 @@ function mapStateToProps({ posts, comments }, ownProps) {
 export default reduxForm({
 	validate: validate,
 	form: 'CommentForm'
-})(withRouter(connect(mapStateToProps)(CommentNewEdit)))
+})(withRouter(connect(mapStateToProps, { fetchComment })(CommentNewEdit)))

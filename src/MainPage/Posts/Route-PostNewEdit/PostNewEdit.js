@@ -14,8 +14,10 @@ class PostNewEdit extends Component {
 		const { id } = this.props.match.params
 
 		if (id) {
-			this.props.fetchSinglePost(id).then(() => this.handleInitialize())
-		}
+				this.props.fetchSinglePost(id).then(() => this.handleInitialize())
+			} else {
+				this.handleInitialize()
+			}
 	}
 
 	handleInitialize() {
@@ -134,7 +136,7 @@ class PostNewEdit extends Component {
 						Submit
 					</button>
 				</form>
-				;<button
+				<button
 					onClick={this.props.history.goBack}
 					className="btn btn-secondary"
 				>

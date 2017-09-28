@@ -7,7 +7,9 @@ import {
   FETCH_COMMENT,
   FETCH_COMMENT_FULFILLED,
   FETCH_COMMENT_REJECTED,
+	CREATE_COMMENT,
   DELETE_COMMENT,
+	EDIT_COMMENT,
   VOTE_ON_COMMENT
 } from './commentsActions';
 
@@ -32,8 +34,11 @@ export default function commentsReducer(state={
         ...state,
         fetching: false,
         fetched: true,
-        comments: _.mapKeys(action.payload, 'id')
-      };
+				comments: {
+           ...state.comments,
+           ...(_.mapKeys(action.payload, 'id'))
+         }
+      }
     }
     case FETCH_COMMENTS_REJECTED: {
       return {
@@ -71,6 +76,18 @@ export default function commentsReducer(state={
         }
       }
     }
+		case CREATE_COMMENT: {
+			return {
+				...state,
+				comments: { ...state.comments, [action.payload.id]: action.payload }
+			}
+		}
+		case EDIT_COMMENT: {
+			return {
+				...state,
+				comments: { ...state.comments, [action.payload.id]: action.payload }
+			}
+		}
     case VOTE_ON_COMMENT: {
       return {
         ...state,

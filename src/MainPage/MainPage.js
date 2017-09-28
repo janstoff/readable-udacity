@@ -9,10 +9,10 @@ class MainPage extends Component {
 	render() {
 		return (
 			<div className="wrapper">
-				<div>
+				<div className="category-header">
 					<h3>Categories</h3>
 				</div>
-				<div>
+				<div className="posts-header">
 					<h3>Posts</h3>
 				</div>
 				<CategoryMenu />

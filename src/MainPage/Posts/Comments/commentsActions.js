@@ -27,7 +27,6 @@ export function fetchCommentsById(postId) {
 			.get(`${API_URL}/posts/${postId}/comments`, { headers: headers })
 			.then(response => {
 				dispatch({ type: FETCH_COMMENTS_FULFILLED, payload: response.data })
-				console.log(response.data)
 			})
 			.catch(error => {
 				dispatch({ type: FETCH_COMMENTS_REJECTED, payload: error })
@@ -38,10 +37,11 @@ export function fetchCommentsById(postId) {
 export function fetchComment(commentId) {
 	return function(dispatch) {
 		dispatch({ type: FETCH_COMMENT })
-		axios
+		return axios
 			.get(`${API_URL}/comments/${commentId}`, { headers: headers })
 			.then(response => {
 				dispatch({ type: FETCH_COMMENT_FULFILLED, payload: response.data })
+				console.log(response.data)
 			})
 			.catch(error => {
 				dispatch({ type: FETCH_COMMENT_REJECTED, payload: error })

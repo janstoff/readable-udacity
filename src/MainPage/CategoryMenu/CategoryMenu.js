@@ -12,7 +12,7 @@ class CategoryMenu extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="category-wrapper">
 				{this.props.categories &&
 					this.props.categories.map(category => (
 						<Link

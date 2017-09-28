@@ -63,7 +63,7 @@ export function fetchPostsByCategory(category) {
 export function fetchSinglePost(id) {
 	return function(dispatch) {
 		dispatch({ type: FETCH_POST })
-		axios
+		return axios
 			.get(`${API_URL}/posts/${id}`, { headers: headers })
 			.then(response => {
 				dispatch({ type: FETCH_POST_FULFILLED, payload: response.data })
