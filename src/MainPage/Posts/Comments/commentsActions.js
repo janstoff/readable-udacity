@@ -27,6 +27,7 @@ export function fetchCommentsById(postId) {
 			.get(`${API_URL}/posts/${postId}/comments`, { headers: headers })
 			.then(response => {
 				dispatch({ type: FETCH_COMMENTS_FULFILLED, payload: response.data })
+				console.log(response.data)
 			})
 			.catch(error => {
 				dispatch({ type: FETCH_COMMENTS_REJECTED, payload: error })

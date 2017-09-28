@@ -68,8 +68,6 @@ export default function postsReducer(state = initialState, action) {
 					[action.payload.id]: action.payload
 				}
 			}
-			// new post state is state.posts as per previous state with the exception of the current action.payload with will be saved under its id
-			// in case the post already exists it will simply be overridden
 		}
 		case FETCH_POST_REJECTED: {
 			return { ...state, fetching: false, error: action.payload }
