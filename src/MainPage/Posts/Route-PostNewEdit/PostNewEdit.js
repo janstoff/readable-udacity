@@ -15,8 +15,6 @@ class PostNewEdit extends Component {
 
 		if (id) {
 				this.props.fetchSinglePost(id).then(() => this.handleInitialize())
-			} else {
-				this.handleInitialize()
 			}
 	}
 

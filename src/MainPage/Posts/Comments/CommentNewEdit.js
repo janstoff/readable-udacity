@@ -13,8 +13,6 @@ class CommentNewEdit extends Component {
 
 		if (commentId) {
 				this.props.fetchComment(commentId).then(() => this.handleInitialize())
-			} else {
-				this.handleInitialize()
 			}
 	}
 

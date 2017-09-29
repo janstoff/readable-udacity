@@ -4,7 +4,7 @@ import { deletePost, voteOnPost } from '../postsActions'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import '../../MainPage.css'
+import '../Route-PostDetail/PostDetail.css'
 import { fetchCommentsById } from '../Comments/commentsActions'
 import { timeConverter } from '../../../utils/helpers'
 
@@ -35,41 +35,45 @@ class Post extends Component {
 				<Link to={`/${post.category}/${post.id}`} className="post-title">
 					{post.title}
 				</Link>
-				<div className="post-author">Author: {post.author}</div>
-				<div className="post-date-time">
-					created: {timeConverter(post.timestamp)}
+				<div className="post-detail">
+					<div className="post-created">
+						<div className="post-author">Author: {post.author}</div>
+						<div className="post-date-time">
+							created: {timeConverter(post.timestamp)}
+						</div>
+					</div>
+					<div className="post-no-of-comments">{commentsPerPost} Comments</div>
+					<div className="post-rating">
+						<div>Rating: {post.voteScore}</div>
+						<div>
+							<button
+								className="btn btn-default upvote-post"
+								value="upVote"
+								onClick={event =>
+									this.props.dispatch(voteOnPost(post.id, event.target.value))}>
+								upvote
+							</button>
+							<button
+								className="btn btn-default downvote-post"
+								value="downVote"
+								onClick={event =>
+									this.props.dispatch(voteOnPost(post.id, event.target.value))}>
+								downvote
+							</button>
+						</div>
+					</div>
+					<div className="post-actions">
+						<button
+							className="btn btn-danger delete-post"
+							onClick={() => this.onClickDelete(post.id)}>
+							Delete Post
+						</button>
+						<Link to={`/${post.id}/edit`} className="btn btn-default edit-post">
+							Edit Post
+						</Link>
+					</div>
 				</div>
-				<div className="post-no-of-comments">{commentsPerPost} Comments</div>
-				<div className="post-rating">Rating: {post.voteScore}</div>
-				<div className="post-actions">
-					<button
-						className="btn btn-danger delete-post"
-						onClick={() => this.onClickDelete(post.id)}
-					>
-						Delete Post
-					</button>
-					<Link to={`/${post.id}/edit`} className="btn btn-default edit-post">
-						Edit Post
-					</Link>
-				</div>
-				<div>
-					<button
-						className="btn btn-default upvote-post"
-						value="upVote"
-						onClick={event =>
-							this.props.dispatch(voteOnPost(post.id, event.target.value))}
-					>
-						upvote
-					</button>
-					<button
-						className="btn btn-default downvote-post"
-						value="downVote"
-						onClick={event =>
-							this.props.dispatch(voteOnPost(post.id, event.target.value))}
-					>
-						downvote
-					</button>
-				</div>
+				<div className="post-content">{post.body}</div>
 			</div>
 		)
 	}
