@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { voteOnComment, deleteComment } from './commentsActions'
-import { timeConverter } from '../../../utils/helpers'
+import { timeConverter } from '../utils/helpers'
 import './Comments.css'
 
 class Comments extends Component {

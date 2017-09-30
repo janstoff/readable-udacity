@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { deletePost, voteOnPost } from '../postsActions'
+import { deletePost, voteOnPost } from './postsActions'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import '../Route-PostDetail/PostDetail.css'
+import './PostDetail.css'
 import { fetchCommentsById } from '../Comments/commentsActions'
-import { timeConverter } from '../../../utils/helpers'
+import { timeConverter } from '../utils/helpers'
 
 class Post extends Component {
 	componentDidMount() {

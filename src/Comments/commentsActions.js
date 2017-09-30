@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_URL, headers } from '../../../utils/api'
+import { API_URL, headers } from '../utils/api'
 
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const FETCH_COMMENTS_FULFILLED = 'FETCH_COMMENTS_FULFILLED'

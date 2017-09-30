@@ -55,7 +55,7 @@
 	width: 10px;
 	height: 16px;
 	justify-self: right;
-	background-image: url('../../../style-elements/icons/delete.png');
+	background-image: url('../style-elements/icons/delete.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 17px;
@@ -69,7 +69,7 @@
 	width: 10px;
 	height: 16px;
 	justify-self: right;
-	background-image: url('../../../style-elements/icons/edit.png');
+	background-image: url('../style-elements/icons/edit.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 17px;
@@ -83,7 +83,7 @@
 	height: 15px;
 	justify-self: right;
 	margin-left: 1px;
-	background-image: url('../../../style-elements/icons/arrow-up.png');
+	background-image: url('../style-elements/icons/arrow-up.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 15px;
@@ -96,7 +96,7 @@
 	width: 12px;
 	height: 15px;
 	justify-self: left;
-	background-image: url('../../../style-elements/icons/arrow-down.png');
+	background-image: url('../style-elements/icons/arrow-down.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 15px;

@@ -7,7 +7,7 @@
 	order: 1;
 	width: 40px;
 	height: 100px;
-	background-image: url('../../../style-elements/icons/arrow-back.svg');
+	background-image: url('../style-elements/icons/arrow-back.svg');
 	border-color: #ddd;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -81,7 +81,7 @@
 	height: 20px;
 	justify-self: right;
 	margin-right: 1px;
-	background-image: url('../../../style-elements/icons/arrow-up.png');
+	background-image: url('../style-elements/icons/arrow-up.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 20px;
@@ -93,7 +93,7 @@
 	width: 20px;
 	height: 20px;
 	justify-self: left;
-	background-image: url('../../../style-elements/icons/arrow-down.png');
+	background-image: url('../style-elements/icons/arrow-down.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 20px;
@@ -113,7 +113,7 @@
 	order: 2;
 	width: 20px;
 	height: 30px;
-	background-image: url('../../../style-elements/icons/delete.png');
+	background-image: url('../style-elements/icons/delete.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 25px;
@@ -125,7 +125,7 @@
 	order: 1;
 	width: 20px;
 	height: 30px;
-	background-image: url('../../../style-elements/icons/edit.png');
+	background-image: url('../style-elements/icons/edit.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 20px;

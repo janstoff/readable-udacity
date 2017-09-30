@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import '../MainPage.css'
+import '../App/MainPage.css'
 
 import { fetchCategories } from './categoriesActions'
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { API_URL, headers } from '../../utils/api'
+import { API_URL, headers } from '../utils/api'
 
 export const FETCH_POSTS = 'FETCH_POSTS'
 export const FETCH_POSTS_FULFILLED = 'FETCH_POSTS_FULFILLED'

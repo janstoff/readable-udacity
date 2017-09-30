@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import './PostNewEdit.css'
 
-import { createPost, editPost, fetchSinglePost } from '../postsActions'
+import { createPost, editPost, fetchSinglePost } from './postsActions'
 
 const uuid = require('uuid/v4')
 

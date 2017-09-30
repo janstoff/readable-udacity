@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import './MainPage.css'
-import CategoryMenu from './CategoryMenu/CategoryMenu'
-import Posts from './Posts/Posts'
+import CategoryMenu from '../Categories/CategoryMenu'
+import Posts from '../Posts/Posts'
 
 class MainPage extends Component {
 	render() {

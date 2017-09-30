@@ -3,8 +3,8 @@ import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import Post from './Post/Post'
-import '../MainPage.css'
+import Post from './Post'
+import '../App/MainPage.css'
 import { fetchPosts, selectSortValue } from './postsActions'
 
 class Posts extends Component {

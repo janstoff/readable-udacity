@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 import './App.css'
 
 import Footer from './Footer'
 import Header from './Header'
-import MainPage from '../MainPage/MainPage'
-import PostDetail from '../MainPage/Posts/Route-PostDetail/PostDetail'
-import PostNewEdit from '../MainPage/Posts/Route-PostNewEdit/PostNewEdit'
-import CommentNewEdit from '../MainPage/Posts/Comments/CommentNewEdit'
+import MainPage from './MainPage'
+import PostDetail from '../Posts/PostDetail'
+import PostNewEdit from '../Posts/PostNewEdit'
+import CommentNewEdit from '../Comments/CommentNewEdit'
 
 class App extends Component {
 	render() {
@@ -32,4 +31,4 @@ class App extends Component {
 	}
 }
 
-export default withRouter(connect()(App))
+export default withRouter(App)

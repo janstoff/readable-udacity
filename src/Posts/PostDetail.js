@@ -5,8 +5,8 @@ import _ from 'lodash'
 
 import './PostDetail.css'
 import Comments from '../Comments/Comments'
-import { timeConverter } from '../../../utils/helpers'
-import { fetchSinglePost, deletePost, voteOnPost } from '../postsActions'
+import { timeConverter } from '../utils/helpers'
+import { fetchSinglePost, deletePost, voteOnPost } from './postsActions'
 import { fetchCommentsById } from '../Comments/commentsActions'
 
 class PostDetail extends Component {
