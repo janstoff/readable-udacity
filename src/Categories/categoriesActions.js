@@ -2,11 +2,12 @@ import axios from 'axios'
 
 import { API_URL, headers } from '../utils/api'
 
-export const FETCH_CATEGORIES = 'FETCH_CATEGORIES'
-export const FETCH_CATEGORIES_FULFILLED = 'FETCH_CATEGORIES_FULFILLED'
-export const FETCH_CATEGORIES_REJECTED = 'FETCH_CATEGORIES_REJECTED'
-
-export const SELECT_CATEGORY = 'SELECT_CATEGORY'
+import {
+	FETCH_CATEGORIES,
+	FETCH_CATEGORIES_FULFILLED,
+	FETCH_CATEGORIES_REJECTED,
+	SELECT_CATEGORY
+} from '../utils/action-types'
 
 export function fetchCategories() {
 	return function(dispatch) {

@@ -3,7 +3,7 @@ import {
 	FETCH_CATEGORIES_FULFILLED,
 	FETCH_CATEGORIES_REJECTED,
 	SELECT_CATEGORY
-} from './categoriesActions'
+} from '../utils/action-types'
 
 const initialState = {
 	fetching: false,

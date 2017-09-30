@@ -11,7 +11,7 @@ import {
   DELETE_COMMENT,
 	EDIT_COMMENT,
   VOTE_ON_COMMENT
-} from './commentsActions';
+} from '../utils/action-types';
 
 
 

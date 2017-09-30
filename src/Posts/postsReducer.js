@@ -15,7 +15,7 @@ import {
 	DELETE_POST,
 	SELECT_SORT_VALUE,
 	VOTE_ON_POST
-} from './postsActions'
+} from '../utils/action-types'
 
 const initialState = {
 	fetching: false,
