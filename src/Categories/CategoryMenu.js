@@ -7,7 +7,7 @@ import { fetchCategories } from './categoriesActions'
 
 class CategoryMenu extends Component {
 	componentWillMount() {
-		this.props.dispatch(fetchCategories())
+		this.props.fetchCategories()
 	}
 
 	render() {
@@ -37,4 +37,4 @@ function mapStateToProps({ categories }) {
 	}
 }
 
-export default withRouter(connect(mapStateToProps)(CategoryMenu))
+export default withRouter(connect(mapStateToProps, { fetchCategories })(CategoryMenu))

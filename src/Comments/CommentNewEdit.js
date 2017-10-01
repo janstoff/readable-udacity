@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 
 import { createComment, editComment, fetchComment } from './commentsActions'
@@ -67,7 +67,7 @@ class CommentNewEdit extends Component {
 	}
 
 	render() {
-		const { post, handleSubmit, submitting, invalid } = this.props
+		const { handleSubmit, submitting, invalid } = this.props
 
 		return (
 			<div className="form-wrapper">

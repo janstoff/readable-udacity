@@ -17,7 +17,6 @@ import {
 	EDIT_POST,
 	EDIT_POST_REJECTED,
 	DELETE_POST,
-	DELETE_POST_REJECTED,
 	SELECT_SORT_VALUE,
 	VOTE_ON_POST
 } from '../utils/action-types'

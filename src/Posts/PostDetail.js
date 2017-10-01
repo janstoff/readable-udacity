@@ -36,8 +36,10 @@ class PostDetail extends Component {
 		const { post, comments } = this.props
 		const { id } = this.props.match.params
 
-		if (!post) {
-			return <div>Loading...</div>
+		console.log(post)
+
+		if (post === undefined) {
+			return <div>Post not found!</div>
 		}
 
 		return (

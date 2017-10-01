@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 
 import './PostNewEdit.css'
@@ -100,9 +100,8 @@ class PostNewEdit extends Component {
 	}
 
 	render() {
-		const { handleSubmit, submitting, invalid, post } = this.props
-		const { id } = this.props.match.params
-
+		const { handleSubmit, submitting, invalid } = this.props
+		
 		return (
 			<div className="form-wrapper">
 				<form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
